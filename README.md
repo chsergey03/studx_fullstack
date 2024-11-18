@@ -1,0 +1,1 @@
+# Full-stack web application for the student educational platform StudX

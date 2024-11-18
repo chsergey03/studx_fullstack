@@ -1,0 +1,40 @@
+services:
+  app:
+    image: app
+    container_name: fullstack_app
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./:/var/www
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+
+  webserver:
+    image: nginx:alpine
+    container_name: fullstack_webserver
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+
+  database:
+    image: postgres:latest
+    container_name: fullstack_database
+    environment:
+      POSTGRES_DB: studx
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 11111111
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data_01:/var/lib/postgresql/data
+
+volumes:
+  db_data_01:
+    driver: local
+  db_data_02:
+    driver: local
