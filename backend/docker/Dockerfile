@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
   locales \
   libzip-dev \
   zip \
+  libpq-dev \
   jpegoptim optipng pngquant gifsicle \
   vim \
   unzip \
@@ -19,9 +20,11 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install pdo_mysql zip exif pcntl sockets && docker-php-ext-enable sockets
+RUN docker-php-ext-install zip exif pcntl sockets && docker-php-ext-enable sockets
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install gd
+
+RUN docker-php-ext-install pdo_pgsql
 
 RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache

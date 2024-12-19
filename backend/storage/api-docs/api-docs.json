@@ -1,0 +1,1190 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Документация StudX API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/api",
+            "description": "Локальный сервер"
+        }
+    ],
+    "paths": {
+        "/courses": {
+            "get": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Получение списка всех курсов",
+                "operationId": "22e2add4714520e5d7420442140cffcb",
+                "responses": {
+                    "200": {
+                        "description": "Успешное получение списка всех курсов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/courses"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/courses/{id}": {
+            "get": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Получение информации о конкретном курсе",
+                "operationId": "0b9b3dc0b0328a34f28f8b6c91152a68",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Идентификатор курса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешное получение информации о курсе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/courses"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Курс не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Курс не найден"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/courses_of_user": {
+            "get": {
+                "tags": [
+                    "courses_of_user"
+                ],
+                "summary": "Получение всех записей о курсах пользователей",
+                "operationId": "56c30ccb270a66533de991a9ce5a8bba",
+                "responses": {
+                    "200": {
+                        "description": "Список записей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/сourses_of_user"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "courses_of_user"
+                ],
+                "summary": "Создание записи о курсе пользователя",
+                "operationId": "746aa265f1965209a5160060cbed6fcc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "course_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "description": "Идентификатор пользователя",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "course_id": {
+                                        "description": "Идентификатор курса",
+                                        "type": "integer",
+                                        "example": 6
+                                    },
+                                    "custom_course_name": {
+                                        "description": "Пользовательское название курса",
+                                        "type": "string",
+                                        "example": "Мой курс",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Запись создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Запись создана"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/сourses_of_user"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/courses_of_user/{id}": {
+            "get": {
+                "tags": [
+                    "courses_of_user"
+                ],
+                "summary": "Получение записи о курсе пользователя",
+                "operationId": "eb155abdf7cd472403fd96670a30a4ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Идентификатор записи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Запись найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/сourses_of_user"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Запись не найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Запись не найдена"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "courses_of_user"
+                ],
+                "summary": "Удаление записи о курсе пользователя",
+                "operationId": "308241aa2863b9c12b8873a38c7b7518",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Идентификатор записи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Запись удалена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Запись удалена"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Запись не найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Запись не найдена"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "courses_of_user"
+                ],
+                "summary": "Обновление записи о курсе пользователя",
+                "operationId": "43dbca059c97eaa301ff636ed09aac2a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Идентификатор записи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "custom_course_name": {
+                                        "description": "Пользовательское название курса",
+                                        "type": "string",
+                                        "example": "Обновленное название курса",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Запись обновлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Запись обновлена"
+                                        },
+                                        "custom_course_name": {
+                                            "type": "string",
+                                            "example": "Обновленное название курса"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Запись не найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Запись не найдена"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/courses/{courseId}/tasks": {
+            "get": {
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Получение всех задач курса",
+                "operationId": "387f13369d82d5b9f8eb0435ce6b5f6d",
+                "parameters": [
+                    {
+                        "name": "courseId",
+                        "in": "path",
+                        "description": "Идентификатор курса",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешное получение всех задач курса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/tasks"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{taskId}": {
+            "get": {
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Получение информации о задаче",
+                "operationId": "442fc90159526ac0a98d0bc1fd59cd04",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Идентификатор задачи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешное получение информации о задаче",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/tasks"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Задача не найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Задача не найдена"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Создание нового пользователя",
+                "operationId": "49b25cdfd1cc549029c3dfd6f39b4d60",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "description": "Логин пользователя",
+                                        "type": "string",
+                                        "example": "mark_brown"
+                                    },
+                                    "password": {
+                                        "description": "Пароль пользователя",
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Новый пользователь создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Новый пользователь создан"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "login": {
+                                            "type": "string",
+                                            "example": "mark_brown"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка валидации"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Удаление пользователя",
+                "operationId": "c02d4b20c36fa979a0112ed40123e73a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Идентификатор пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Пользователь удалён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Пользователь удалён"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Пользователь не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Пользователь не найден"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Обновление логина пользователя",
+                "operationId": "697dfb6991375c65ca584a7a4feec50f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Идентификатор пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "login": {
+                                        "description": "Логин пользователя",
+                                        "type": "string",
+                                        "example": "john_doe"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Логин пользователя обновлён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Логин пользователя обновлён"
+                                        },
+                                        "login": {
+                                            "type": "string",
+                                            "example": "john_doe"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Пользователь не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Пользователь не найден"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/authenticate": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Аутентификация пользователя",
+                "operationId": "be111ab3eb9f4e6ac447b0a7ea285cab",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "description": "Логин, введённый пользователем",
+                                        "type": "string",
+                                        "example": "mark_brown"
+                                    },
+                                    "password": {
+                                        "description": "Пароль, введённый пользователем",
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Пользователь успешно прошёл аутентификацию",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Пользователь успешно прошёл аутентификацию"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "login": {
+                                            "type": "string",
+                                            "example": "mark_brown"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Неверный логин или пароль",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Неверный логин или пароль"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка сервера"
+                                        },
+                                        "details": {
+                                            "type": "string",
+                                            "example": "error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "courses": {
+                "title": "Курс",
+                "description": "Схема курса",
+                "required": [
+                    "id",
+                    "code",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор курса",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "code": {
+                        "description": "Код курса",
+                        "type": "string",
+                        "example": "WEB102"
+                    },
+                    "name": {
+                        "description": "Название курса",
+                        "type": "string",
+                        "example": "Responsive Web Design"
+                    },
+                    "subject_name": {
+                        "description": "Название предмета",
+                        "type": "string",
+                        "example": "UI/UX Design",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "description": "Дата и время создания курса",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата и время последнего обновления курса",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            },
+            "сourses_of_user": {
+                "title": "Курс пользователя",
+                "description": "Схема записи пользователя и курса",
+                "required": [
+                    "id",
+                    "user_id",
+                    "course_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор записи",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "description": "Идентификатор пользователя",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "course_id": {
+                        "description": "Идентификатор курса",
+                        "type": "integer",
+                        "example": 6
+                    },
+                    "custom_course_name": {
+                        "description": "Пользовательское название курса",
+                        "type": "string",
+                        "example": "Мой курс",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "description": "Дата и время создания записи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата и время последнего обновления записи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            },
+            "tasks": {
+                "title": "Задача",
+                "description": "Схема задачи",
+                "required": [
+                    "id",
+                    "course_id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор задачи",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "course_id": {
+                        "description": "Идентификатор курса",
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Название задачи",
+                        "type": "string",
+                        "example": "HTML & CSS Basics"
+                    },
+                    "created_at": {
+                        "description": "Дата и время создания задачи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата и время последнего обновления задачи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            },
+            "users": {
+                "title": "Пользователь",
+                "description": "Схема пользователя",
+                "required": [
+                    "id",
+                    "login",
+                    "password_hash"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор пользователя",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "login": {
+                        "description": "Логин пользователя",
+                        "type": "string",
+                        "example": "mark_brown"
+                    },
+                    "password_hash": {
+                        "description": "Хэш пароля",
+                        "type": "string",
+                        "example": "$2y$10$zNMhNQlZ6s08xWQZPp0GEOo./6z8bMQVzDgmEFOzWwnXTtn5OwR4K"
+                    },
+                    "created_at": {
+                        "description": "Дата и время создания пользователя",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата и время последнего обновления пользователя",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-19T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "courses",
+            "description": "courses"
+        },
+        {
+            "name": "courses_of_user",
+            "description": "courses_of_user"
+        },
+        {
+            "name": "tasks",
+            "description": "tasks"
+        },
+        {
+            "name": "users",
+            "description": "users"
+        }
+    ]
+}

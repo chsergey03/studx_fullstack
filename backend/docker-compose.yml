@@ -15,7 +15,7 @@ services:
     image: nginx:alpine
     container_name: fullstack_webserver
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
     volumes:
       - ./:/var/www
@@ -33,8 +33,19 @@ services:
     volumes:
       - db_data_01:/var/lib/postgresql/data
 
+  drawdb:
+    image: ghcr.io/drawdb-io/drawdb:latest
+    container_name: fullstack_drawdb
+    environment:
+      - DATABASE_HOST=fullstack_database
+      - DATABASE_PORT=5432
+      - DATABASE_USER=admin
+      - DATABASE_PASSWORD=11111111
+      - DATABASE_NAME=studx
+    restart: always
+    ports:
+      - "3000:80"
+
 volumes:
   db_data_01:
-    driver: local
-  db_data_02:
     driver: local
