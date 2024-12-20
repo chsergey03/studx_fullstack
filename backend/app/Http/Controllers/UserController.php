@@ -15,8 +15,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @OA\Schema(
  *   schema="users",
  *   type="object",
- *   title="Пользователь",
- *   description="Схема пользователя",
+ *   title="users",
+ *   description="Схема пользователей",
  *   required={"id", "login", "password_hash"},
  *   @OA\Property(
  *     property="id",
@@ -31,25 +31,30 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  *     example="mark_brown"
  *   ),
  *   @OA\Property(
- *      property="password_hash",
- *      type="string",
- *      description="Хэш пароля",
- *      example="$2y$10$zNMhNQlZ6s08xWQZPp0GEOo./6z8bMQVzDgmEFOzWwnXTtn5OwR4K"
- *    ),
+ *     property="password_hash",
+ *     type="string",
+ *     description="Хэш пароля",
+ *     example="$2y$10$zNMhNQlZ6s08xWQZPp0GEOo./6z8bMQVzDgmEFOzWwnXTtn5OwR4K"
+ *   ),
  *   @OA\Property(
  *     property="created_at",
  *     type="string",
  *     format="date-time",
  *     description="Дата и время создания пользователя",
- *     example="2024-12-19T12:34:56Z"
+ *     example="2024-12-20T10:15:30Z"
  *   ),
  *   @OA\Property(
  *     property="updated_at",
  *     type="string",
  *     format="date-time",
  *     description="Дата и время последнего обновления пользователя",
- *     example="2024-12-19T12:34:56Z"
+ *     example="2024-12-21T14:22:45Z"
  *   )
+ * )
+ *
+ * @OA\Tag(
+ *   name="users",
+ *   description="Методы, связанные с пользователями"
  * )
  */
 class UserController extends Controller

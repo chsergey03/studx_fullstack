@@ -23,8 +23,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @OA\Schema(
  *   schema="courses",
  *   type="object",
- *   title="Курс",
- *   description="Схема курса",
+ *   title="courses",
+ *   description="Схема курсов",
  *   required={"id", "code", "name"},
  *   @OA\Property(
  *     property="id",
@@ -56,15 +56,20 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  *     type="string",
  *     format="date-time",
  *     description="Дата и время создания курса",
- *     example="2024-12-19T12:34:56Z"
+ *     example="2024-12-20T10:15:30Z"
  *   ),
  *   @OA\Property(
  *     property="updated_at",
  *     type="string",
  *     format="date-time",
  *     description="Дата и время последнего обновления курса",
- *     example="2024-12-19T12:34:56Z"
+ *     example="2024-12-21T14:22:45Z"
  *   )
+ * )
+ *
+ * @OA\Tag(
+ *   name="courses",
+ *   description="Методы, связанные с курсами"
  * )
  */
 class CoursesController extends Controller

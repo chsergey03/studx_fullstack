@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @OA\Schema(
  *   schema="tasks",
  *   type="object",
- *   title="Задача",
- *   description="Схема задачи",
+ *   title="tasks",
+ *   description="Схема задач",
  *   required={"id", "course_id", "name"},
  *   @OA\Property(
  *     property="id",
@@ -32,22 +32,46 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  *     property="name",
  *     type="string",
  *     description="Название задачи",
- *     example="HTML & CSS Basics"
+ *     example="Задача 1"
+ *   ),
+ *   @OA\Property(
+ *     property="theme",
+ *     type="string",
+ *     description="Тема задачи",
+ *     example="Основы HTML и CSS"
+ *   ),
+ *   @OA\Property(
+ *     property="deadline",
+ *     type="string",
+ *     format="date-time",
+ *     description="Крайний срок выполнения задачи",
+ *     example="2024-12-25T23:59:59Z"
+ *   ),
+ *   @OA\Property(
+ *     property="grade_max_value",
+ *     type="string",
+ *     description="Максимальная оценка за задачу",
+ *     example="100"
  *   ),
  *   @OA\Property(
  *     property="created_at",
  *     type="string",
  *     format="date-time",
  *     description="Дата и время создания задачи",
- *     example="2024-12-19T12:34:56Z"
+ *     example="2024-12-20T10:15:30Z"
  *   ),
  *   @OA\Property(
  *     property="updated_at",
  *     type="string",
  *     format="date-time",
  *     description="Дата и время последнего обновления задачи",
- *     example="2024-12-19T12:34:56Z"
+ *     example="2024-12-21T14:22:45Z"
  *   )
+ * )
+ *
+ * @OA\Tag(
+ *   name="tasks",
+ *   description="Методы, связанные с задачами"
  * )
  */
 class TasksController extends Controller
@@ -61,7 +85,8 @@ class TasksController extends Controller
    *     name="courseId",
    *     in="path",
    *     required=true,
-   *     description="Идентификатор курса"
+   *     description="Идентификатор курса",
+   *     @OA\Schema(type="integer", example=1)
    *   ),
    *   @OA\Response(
    *     response=200,

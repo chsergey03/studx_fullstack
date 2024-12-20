@@ -12,10 +12,10 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * @OA\Schema(
- *   schema="сourses_of_user",
+ *   schema="courses_of_user",
  *   type="object",
- *   title="Курс пользователя",
- *   description="Схема записи пользователя и курса",
+ *   title="courses_of_user",
+ *   description="Схема курсов пользователя",
  *   required={"id", "user_id", "course_id"},
  *   @OA\Property(
  *     property="id",
@@ -43,19 +43,24 @@ use Illuminate\Http\JsonResponse;
  *     example="Мой курс"
  *   ),
  *   @OA\Property(
- *     property="created_at",
- *     type="string",
- *     format="date-time",
- *     description="Дата и время создания записи",
- *     example="2024-12-19T12:34:56Z"
- *   ),
- *   @OA\Property(
- *     property="updated_at",
- *     type="string",
- *     format="date-time",
- *     description="Дата и время последнего обновления записи",
- *     example="2024-12-19T12:34:56Z"
- *   )
+ *      property="created_at",
+ *      type="string",
+ *      format="date-time",
+ *      description="Дата и время создания записи",
+ *      example="2024-12-20T10:15:30Z"
+ *    ),
+ *    @OA\Property(
+ *      property="updated_at",
+ *      type="string",
+ *      format="date-time",
+ *      description="Дата и время последнего обновления записи",
+ *      example="2024-12-21T14:22:45Z"
+ *    )
+ * )
+ *
+ * @OA\Tag(
+ *   name="courses_of_user",
+ *   description="Методы, связанные с курсами пользователя"
  * )
  */
 class CoursesOfUserController extends Controller
@@ -95,7 +100,7 @@ class CoursesOfUserController extends Controller
    *     description="Запись создана",
    *     @OA\JsonContent(
    *       @OA\Property(property="message", type="string", example="Запись создана"),
-   *       @OA\Property(property="data", ref="#/components/schemas/сourses_of_user")
+   *       @OA\Property(property="data", ref="#/components/schemas/courses_of_user")
    *     )
    *   ),
    *   @OA\Response(
@@ -239,7 +244,7 @@ class CoursesOfUserController extends Controller
    *     description="Список записей",
    *     @OA\JsonContent(
    *       type="array",
-   *       @OA\Items(ref="#/components/schemas/сourses_of_user")
+   *       @OA\Items(ref="#/components/schemas/courses_of_user")
    *     )
    *   ),
    *   @OA\Response(
@@ -285,7 +290,7 @@ class CoursesOfUserController extends Controller
    *   @OA\Response(
    *     response=200,
    *     description="Запись найдена",
-   *     @OA\JsonContent(ref="#/components/schemas/сourses_of_user")
+   *     @OA\JsonContent(ref="#/components/schemas/courses_of_user")
    *   ),
    *   @OA\Response(
    *     response=404,

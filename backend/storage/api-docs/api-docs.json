@@ -143,7 +143,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/сourses_of_user"
+                                        "$ref": "#/components/schemas/courses_of_user"
                                     }
                                 }
                             }
@@ -221,7 +221,7 @@
                                             "example": "Запись создана"
                                         },
                                         "data": {
-                                            "$ref": "#/components/schemas/сourses_of_user"
+                                            "$ref": "#/components/schemas/courses_of_user"
                                         }
                                     },
                                     "type": "object"
@@ -277,7 +277,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/сourses_of_user"
+                                    "$ref": "#/components/schemas/courses_of_user"
                                 }
                             }
                         }
@@ -513,7 +513,11 @@
                         "name": "courseId",
                         "in": "path",
                         "description": "Идентификатор курса",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
                     }
                 ],
                 "responses": {
@@ -1000,8 +1004,8 @@
     "components": {
         "schemas": {
             "courses": {
-                "title": "Курс",
-                "description": "Схема курса",
+                "title": "courses",
+                "description": "Схема курсов",
                 "required": [
                     "id",
                     "code",
@@ -1033,20 +1037,20 @@
                         "description": "Дата и время создания курса",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-20T10:15:30Z"
                     },
                     "updated_at": {
                         "description": "Дата и время последнего обновления курса",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-21T14:22:45Z"
                     }
                 },
                 "type": "object"
             },
-            "сourses_of_user": {
-                "title": "Курс пользователя",
-                "description": "Схема записи пользователя и курса",
+            "courses_of_user": {
+                "title": "courses_of_user",
+                "description": "Схема курсов пользователя",
                 "required": [
                     "id",
                     "user_id",
@@ -1078,20 +1082,20 @@
                         "description": "Дата и время создания записи",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-20T10:15:30Z"
                     },
                     "updated_at": {
                         "description": "Дата и время последнего обновления записи",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-21T14:22:45Z"
                     }
                 },
                 "type": "object"
             },
             "tasks": {
-                "title": "Задача",
-                "description": "Схема задачи",
+                "title": "tasks",
+                "description": "Схема задач",
                 "required": [
                     "id",
                     "course_id",
@@ -1111,26 +1115,42 @@
                     "name": {
                         "description": "Название задачи",
                         "type": "string",
-                        "example": "HTML & CSS Basics"
+                        "example": "Задача 1"
+                    },
+                    "theme": {
+                        "description": "Тема задачи",
+                        "type": "string",
+                        "example": "Основы HTML и CSS"
+                    },
+                    "deadline": {
+                        "description": "Крайний срок выполнения задачи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-25T23:59:59Z"
+                    },
+                    "grade_max_value": {
+                        "description": "Максимальная оценка за задачу",
+                        "type": "string",
+                        "example": "100"
                     },
                     "created_at": {
                         "description": "Дата и время создания задачи",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-20T10:15:30Z"
                     },
                     "updated_at": {
                         "description": "Дата и время последнего обновления задачи",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-21T14:22:45Z"
                     }
                 },
                 "type": "object"
             },
             "users": {
-                "title": "Пользователь",
-                "description": "Схема пользователя",
+                "title": "users",
+                "description": "Схема пользователей",
                 "required": [
                     "id",
                     "login",
@@ -1156,13 +1176,13 @@
                         "description": "Дата и время создания пользователя",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-20T10:15:30Z"
                     },
                     "updated_at": {
                         "description": "Дата и время последнего обновления пользователя",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2024-12-19T12:34:56Z"
+                        "example": "2024-12-21T14:22:45Z"
                     }
                 },
                 "type": "object"
@@ -1172,19 +1192,19 @@
     "tags": [
         {
             "name": "courses",
-            "description": "courses"
+            "description": "Методы, связанные с курсами"
         },
         {
             "name": "courses_of_user",
-            "description": "courses_of_user"
+            "description": "Методы, связанные с курсами пользователя"
         },
         {
             "name": "tasks",
-            "description": "tasks"
+            "description": "Методы, связанные с задачами"
         },
         {
             "name": "users",
-            "description": "users"
+            "description": "Методы, связанные с пользователями"
         }
     ]
 }
